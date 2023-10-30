@@ -35,13 +35,15 @@ class Line {
       return;
 
     const ctx = this.canvas.getContext("2d");
-    ctx.strokeStyle = this.getColour();
-    ctx.lineWidth = 1;
-
-    ctx.beginPath();
-    ctx.moveTo(this.dotOne.x - 4, this.dotOne.y - 4);
-    ctx.lineTo(this.dotTwo.x - 4, this.dotTwo.y - 4);
-    ctx.stroke();
+    if(ctx){
+      ctx.strokeStyle = this.getColour();
+      ctx.lineWidth = 1;
+  
+      ctx.beginPath();
+      ctx.moveTo(this.dotOne.x - 4, this.dotOne.y - 4);
+      ctx.lineTo(this.dotTwo.x - 4, this.dotTwo.y - 4);
+      ctx.stroke();
+    }
   }
 
   getColour(): string {
