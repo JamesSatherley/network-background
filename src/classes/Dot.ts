@@ -1,5 +1,11 @@
 class Dot {
-  constructor(x, y, x_v, y_v, c) {
+  x: number;
+  y: number;
+  x_v: number;
+  y_v: number;
+  class: string;
+
+  constructor(x: number, y: number, x_v: number, y_v: number, c: number) {
     this.x = x;
     this.y = y;
     this.x_v = x_v;
@@ -7,13 +13,13 @@ class Dot {
     this.class = ["purple", "green", "blue"][c];
   }
 
-  update() {
+  update(): void {
     this.limitCheck();
     this.x += this.x_v;
     this.y += this.y_v;
   }
 
-  limitCheck() {
+  limitCheck(): void {
     if (this.x < -5) {
       this.x = this.x + window.innerWidth;
     }

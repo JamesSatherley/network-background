@@ -1,6 +1,16 @@
 import React from "react";
 
-function Dots({ dots }) {
+interface Dot {
+  class: string;
+  x: number;
+  y: number;
+}
+
+interface DotsProps {
+  dots: Dot[];
+}
+
+function Dots({ dots }: DotsProps) {
   return (
     <>
       {dots.map((dot, index) => (

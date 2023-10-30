@@ -1,5 +1,17 @@
+import Dot from "./Dot";
+
 class Line {
-  constructor(dotOne, dotTwo, canvas) {
+  dotOne: Dot;
+  dotTwo: Dot;
+  dead: boolean;
+  deadCount: number;
+  new: boolean;
+  newCount: number;
+  colorStep: number;
+  alpha: number;
+  canvas: HTMLCanvasElement;
+
+  constructor(dotOne: Dot, dotTwo: Dot, canvas: HTMLCanvasElement) {
     this.dotOne = dotOne;
     this.dotTwo = dotTwo;
     this.dead = false;
@@ -11,10 +23,11 @@ class Line {
     this.canvas = canvas;
   }
 
-  draw() {
-    var difference = function (a, b) {
+  draw(): void {
+    const difference = (a: number, b: number) => {
       return Math.abs(a - b);
     };
+
     if (
       difference(this.dotOne.x, this.dotTwo.x) > 250 ||
       difference(this.dotOne.y, this.dotTwo.y) > 250
@@ -31,7 +44,7 @@ class Line {
     ctx.stroke();
   }
 
-  getColour() {
+  getColour(): string {
     if (this.new) {
       this.alpha += 0.05;
       if (this.alpha >= 1) {
