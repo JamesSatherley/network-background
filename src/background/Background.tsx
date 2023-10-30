@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
-import Canvas from "./components/Canvas";
-import Dots from "./components/Dots";
-import { findIntersections, generateArr } from "./utils";
+import "./Background.css";
+import Canvas from "../components/Canvas";
+import Dots from "../components/Dots";
+import { findIntersections, generateArr } from "../utils";
 import Line from "classes/Line";
+import { BackgroundProps } from "./BackgroundProps";
 
 let canvas: any;
-
-interface BackgroundProps {
-  speedModifer?: number;
-  amountOfDots?: number;
-  lineDistance?: number;
-}
 
 export const App: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120}) => {
 
