@@ -2,7 +2,7 @@ import Dot from "./classes/Dot";
 import Line from "./classes/Line";
 import React from 'react'
 
-export function generateArr(speedModifer: number, amountOfDots: number): Dot[] {
+export function generateArr(speedModifer: number, amountOfDots: number, height: number, width: number): Dot[] {
   return Array(amountOfDots)
     .fill(null)
     .map(() => {
@@ -12,6 +12,8 @@ export function generateArr(speedModifer: number, amountOfDots: number): Dot[] {
         randomIntFromInterval(10, window.innerHeight - 10),
         arr[0],
         arr[1],
+        width,
+        height,
         randomIntFromInterval(0, 2)
       );
     });

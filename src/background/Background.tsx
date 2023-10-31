@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import "./Background.css";
+import React, { useState, useEffect, useRef } from "react";
 import Canvas from "../components/Canvas";
 import Dots from "../components/Dots";
 import { findIntersections, generateArr } from "../utils";
@@ -8,19 +7,19 @@ import { BackgroundProps } from "./BackgroundProps";
 
 let canvas: any;
 
-export const App: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120}) => {
+export const NetBackground: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120, height, width}) => {
+  const networkBackgroundRef = useRef<HTMLDivElement | null>(null);
 
-  const [speedModiferState, setSpeedModifer] = useState(speedModifer)
-  const [amountOfDotsState, setAmountOfDots] = useState(amountOfDots)
-  const [lineDistanceState, setLineDistance] = useState(lineDistance)
+  height = height ?? networkBackgroundRef.current?.clientHeight ?? window.innerHeight
+  width = width ?? networkBackgroundRef.current?.clientWidth ?? window.innerWidth
 
-
-  const [dots] = useState(generateArr(speedModiferState, amountOfDotsState));
+  const [dots] = useState(generateArr(speedModifer, amountOfDots, height, width));
   const [lines, setLines] = useState(
-    new Array(amountOfDotsState)
+    new Array(amountOfDots)
       .fill(null)
-      .map(() => new Array(amountOfDotsState).fill(null))
+      .map(() => new Array(amountOfDots).fill(null))
   );
+
   const [deathLines, setDeathLines] = useState<Line[]>([]);
   const [ticker, setTicker] = useState(true);
   const [init, setInit] = useState(false);
@@ -44,8 +43,8 @@ export const App: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDot
           setLines,
           deathLines,
           setDeathLines,
-          amountOfDotsState,
-          lineDistanceState,
+          amountOfDots,
+          lineDistance,
           canvas
         );
         setTicker(!tick);
@@ -55,9 +54,9 @@ export const App: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDot
   }, [init, ticker, dots]);
 
   return (
-    <>
+    <div ref={networkBackgroundRef} className="overflow-hidden">
       <Canvas />
       <Dots dots={dots} />
-    </>
+    </div>
   );
 }

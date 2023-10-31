@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: rgb(0, 4, 29);
-  overflow: hidden;
-}
-
 .circle {
   position: absolute;
   height: 0.4rem;
