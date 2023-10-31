@@ -8,8 +8,8 @@ export function generateArr(speedModifer: number, amountOfDots: number, height: 
     .map(() => {
       const arr = getRandomVelocities(speedModifer);
       return new Dot(
-        randomIntFromInterval(10, window.innerWidth - 10),
-        randomIntFromInterval(10, window.innerHeight - 10),
+        randomIntFromInterval(10, width - 10),
+        randomIntFromInterval(10, height - 10),
         arr[0],
         arr[1],
         width,

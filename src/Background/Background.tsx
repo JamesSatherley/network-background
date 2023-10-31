@@ -24,7 +24,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   const [deathLines, setDeathLines] = useState<Line[]>([]);
   const [ticker, setTicker] = useState(true);
   const [init, setInit] = useState(false);
-  if(init) {
+  if(!init) {
     console.log( height, networkBackgroundRef.current?.clientHeight, window.innerHeight)
   }
   useEffect(() => {
