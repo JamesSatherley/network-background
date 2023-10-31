@@ -1,2 +1,2 @@
 import "./index.css";
-export * from "./awd";
+export * from "./Background";
