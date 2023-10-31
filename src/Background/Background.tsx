@@ -35,6 +35,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
     async function call(tick: boolean) {
       requestAnimationFrame(() => {
+        console.log(dots)
         dots.forEach((dot) => dot.update());
         findIntersections(
           dots,
@@ -53,7 +54,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   }, [init, ticker, dots]);
 
   return (
-    <div ref={networkBackgroundRef} className="overflow-hidden h-screen w-screen">
+    <div ref={networkBackgroundRef} className="overflow-hidden h-screen w-screen z-10">
       hi
       <Canvas width={width} height={height} />
       <Dots dots={dots} />

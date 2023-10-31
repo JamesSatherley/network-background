@@ -13,6 +13,7 @@ interface DotsProps {
 function Dots({ dots }: DotsProps) {
   return (
     <>
+    hi
       {dots.map((dot, index) => (
         <div
           key={index}
