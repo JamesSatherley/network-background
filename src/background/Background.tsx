@@ -7,7 +7,7 @@ import { BackgroundProps } from "./BackgroundProps";
 
 let canvas: any;
 
-export const NetBackground: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120, height, width}) => {
+export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120, height, width}) => {
   const networkBackgroundRef = useRef<HTMLDivElement | null>(null);
 
   height = height ?? networkBackgroundRef.current?.clientHeight ?? window.innerHeight
