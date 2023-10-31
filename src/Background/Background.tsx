@@ -24,6 +24,9 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   const [deathLines, setDeathLines] = useState<Line[]>([]);
   const [ticker, setTicker] = useState(true);
   const [init, setInit] = useState(false);
+  if(!init) {
+    console.log(networkBackgroundElement, height, width, window)
+  }
   useEffect(() => {
     if (!init) {
       canvas = document.querySelector("#canvas");
@@ -52,7 +55,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   }, [init, ticker, dots]);
 
   return (
-    <div id="networkBackground" className="overflow-hidden h-screen w-screen z-10">
+    <div id="networkBackground" className="scrollbar-none overflow-hidden h-screen w-screen z-10">
       hi
       <Canvas width={width} height={height} />
       <Dots dots={dots} />
