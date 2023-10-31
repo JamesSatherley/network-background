@@ -12,6 +12,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
   height = height ?? networkBackgroundRef.current?.clientHeight ?? window.innerHeight
   width = width ?? networkBackgroundRef.current?.clientWidth ?? window.innerWidth
+  console.log(height,width)
 
   const [dots] = useState(generateArr(speedModifer, amountOfDots, height, width));
   const [lines, setLines] = useState(
@@ -27,10 +28,8 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   useEffect(() => {
     if (!init) {
       canvas = document.querySelector("#canvas");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      console.log(canvas.width, document.body.clientWidth);
-      console.log(canvas.height, document.body.clientHeight);
+      canvas.width = width;
+      canvas.height = height;
       setInit(true);
     }
 
@@ -54,7 +53,8 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   }, [init, ticker, dots]);
 
   return (
-    <div ref={networkBackgroundRef} className="overflow-hidden">
+    <div ref={networkBackgroundRef} className="overflow-hidden h-screen w-screen">
+      hi
       <Canvas />
       <Dots dots={dots} />
     </div>
