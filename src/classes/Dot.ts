@@ -7,7 +7,7 @@ class Dot {
   y_max: number;
   class: string;
 
-  constructor(x: number, y: number, x_v: number, y_v: number, c: number, x_max: number, y_max: number) {
+  constructor(x: number, y: number, x_v: number, y_v: number, x_max: number, y_max: number, c: number) {
     this.x = x;
     this.y = y;
     this.x_v = x_v;
@@ -15,7 +15,6 @@ class Dot {
     this.x_max = x_max;
     this.y_max = y_max;
     this.class = ["purple", "green", "blue"][c];
-    console.log(x,y,x_v,y_v,x_max,y_max)
   }
 
   update(): void {
