@@ -12,7 +12,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
   height = height ?? networkBackgroundRef.current?.clientHeight ?? window.innerHeight
   width = width ?? networkBackgroundRef.current?.clientWidth ?? window.innerWidth
-  console.log(height,width)
+
 
   const [dots] = useState(generateArr(speedModifer, amountOfDots, height, width));
   const [lines, setLines] = useState(
@@ -24,7 +24,9 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   const [deathLines, setDeathLines] = useState<Line[]>([]);
   const [ticker, setTicker] = useState(true);
   const [init, setInit] = useState(false);
-
+  if(init) {
+    console.log( height, networkBackgroundRef.current?.clientHeight, window.innerHeight)
+  }
   useEffect(() => {
     if (!init) {
       canvas = document.querySelector("#canvas");
@@ -35,7 +37,6 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
     async function call(tick: boolean) {
       requestAnimationFrame(() => {
-        console.log(dots)
         dots.forEach((dot) => dot.update());
         findIntersections(
           dots,
