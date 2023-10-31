@@ -55,7 +55,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   return (
     <div ref={networkBackgroundRef} className="overflow-hidden h-screen w-screen">
       hi
-      <Canvas />
+      <Canvas width={width} height={height} />
       <Dots dots={dots} />
     </div>
   );
