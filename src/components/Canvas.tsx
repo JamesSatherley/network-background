@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import useCanvas from "../hooks/useCanvas";
+import React, { useEffect } from "react";
 
 interface CanvasProps {
   width: number;
@@ -7,10 +6,20 @@ interface CanvasProps {
 }
 
 const Canvas: React.FC<CanvasProps> = ({ width, height }: CanvasProps) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  useCanvas(canvasRef, width, height);
+  useEffect(() => {
+    const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
-  return <canvas ref={canvasRef} id="canvas">canvas</canvas>;
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        canvas.width = width;
+        canvas.height = height;
+        // Additional canvas setup and drawing code if needed
+      }
+    }
+  }, [width, height]);
+
+  return <canvas id="canvas">canvas</canvas>;
 };
 
 export default Canvas;

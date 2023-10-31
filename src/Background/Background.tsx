@@ -8,11 +8,11 @@ import { BackgroundProps } from "./BackgroundProps";
 let canvas: any;
 
 export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120, height, width}) => {
-  const networkBackgroundRef = useRef<HTMLDivElement | null>(null);
+  const networkBackgroundElement = document.querySelector("#networkBackground");
 
-  height = height ?? networkBackgroundRef.current?.clientHeight ?? window.innerHeight
-  width = width ?? networkBackgroundRef.current?.clientWidth ?? window.innerWidth
 
+  height = height ?? networkBackgroundElement?.clientHeight ?? window.innerHeight
+  width = width ?? networkBackgroundElement?.clientWidth ?? window.innerWidth
 
   const [dots] = useState(generateArr(speedModifer, amountOfDots, height, width));
   const [lines, setLines] = useState(
@@ -24,9 +24,6 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   const [deathLines, setDeathLines] = useState<Line[]>([]);
   const [ticker, setTicker] = useState(true);
   const [init, setInit] = useState(false);
-  if(!init) {
-    console.log( height, networkBackgroundRef.current?.clientHeight, window.innerHeight)
-  }
   useEffect(() => {
     if (!init) {
       canvas = document.querySelector("#canvas");
@@ -55,7 +52,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   }, [init, ticker, dots]);
 
   return (
-    <div ref={networkBackgroundRef} className="overflow-hidden h-screen w-screen z-10">
+    <div id="networkBackground" className="overflow-hidden h-screen w-screen z-10">
       hi
       <Canvas width={width} height={height} />
       <Dots dots={dots} />

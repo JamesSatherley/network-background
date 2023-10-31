@@ -15,6 +15,7 @@ class Dot {
     this.x_max = x_max;
     this.y_max = y_max;
     this.class = ["purple", "green", "blue"][c];
+    console.log(x,y,x_v,y_v,x_max,y_max)
   }
 
   update(): void {
