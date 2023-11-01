@@ -20,7 +20,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   const [init, setInit] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  document.addEventListener("DOMContentLoaded", function () {
     const networkBackgroundElement = document.querySelector("#networkBackground");
     height = height ?? networkBackgroundElement?.clientHeight ?? window.innerHeight
     width = width ?? networkBackgroundElement?.clientWidth ?? window.innerWidth
@@ -54,7 +54,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
     }
     call(ticker);
     setLoading(true)
-  }, []);
+  });
 
   return (
     loading ? (
