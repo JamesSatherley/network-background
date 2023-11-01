@@ -27,6 +27,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
     if (!init) {
       console.log(networkBackgroundElement, height, width, window)
+      console.dir(networkBackgroundElement)
       const canvas = canvasRef.current;
       if (canvas) {
         canvas.width = width;
@@ -59,8 +60,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
     <>
       {loading && <div>Loading...</div>}
       <div id="networkBackground" className="scrollbar-none overflow-hidden h-screen w-screen z-10">
-        hi
-        <canvas id="canvas">canvas</canvas>;
+        <canvas ref={canvasRef}>canvas</canvas>;
         {dots.map((dot, index) => (
           <div
             key={index}

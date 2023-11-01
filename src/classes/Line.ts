@@ -36,12 +36,13 @@ class Line {
 
     const ctx = this.canvas.getContext("2d");
     if(ctx){
+      const offsetBugPatch = 0
       ctx.strokeStyle = this.getColour();
       ctx.lineWidth = 1;
   
       ctx.beginPath();
-      ctx.moveTo(this.dotOne.x - 4, this.dotOne.y - 4);
-      ctx.lineTo(this.dotTwo.x - 4, this.dotTwo.y - 4);
+      ctx.moveTo(this.dotOne.x - offsetBugPatch, this.dotOne.y - offsetBugPatch);
+      ctx.lineTo(this.dotTwo.x - offsetBugPatch, this.dotTwo.y - offsetBugPatch);
       ctx.stroke();
     }
   }
