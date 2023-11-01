@@ -49,51 +49,53 @@ export function findIntersections(
   setDeathLines: React.Dispatch<React.SetStateAction<Line[]>>,
   amountOfDots: number,
   lineDistance: number,
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement | null
 ): void {
-  clearCanvas(canvas);
-  const arr: (Line | null)[][] = new Array(amountOfDots)
-    .fill(null)
-    .map(() => new Array(amountOfDots).fill(null));
-  for (let i = 0; i < dots.length; i++) {
-    const element_i = dots[i];
-    for (let j = 0; j < dots.length; j++) {
-      const element_j = dots[j];
-      if (
-        element_i.x + lineDistance > element_j.x &&
-        element_i.x - lineDistance < element_j.x &&
-        element_i.y + lineDistance > element_j.y &&
-        element_i.y - lineDistance < element_j.y
-      ) {
-        if (lines[i][j] != null) {
-          arr[i][j] = lines[i][j];
-          arr[i][j]!.dotOne = element_i;
-          arr[i][j]!.dotTwo = element_j;
-        } else {
-          arr[i][j] = new Line(element_i, element_j, canvas);
+  if(canvas){
+    clearCanvas(canvas);
+    const arr: (Line | null)[][] = new Array(amountOfDots)
+      .fill(null)
+      .map(() => new Array(amountOfDots).fill(null));
+    for (let i = 0; i < dots.length; i++) {
+      const element_i = dots[i];
+      for (let j = 0; j < dots.length; j++) {
+        const element_j = dots[j];
+        if (
+          element_i.x + lineDistance > element_j.x &&
+          element_i.x - lineDistance < element_j.x &&
+          element_i.y + lineDistance > element_j.y &&
+          element_i.y - lineDistance < element_j.y
+        ) {
+          if (lines[i][j] != null) {
+            arr[i][j] = lines[i][j];
+            arr[i][j]!.dotOne = element_i;
+            arr[i][j]!.dotTwo = element_j;
+          } else {
+            arr[i][j] = new Line(element_i, element_j, canvas);
+          }
+        } else if (lines[i][j] != null) {
+          let line = lines[i][j]!;
+          line.dead = true;
+          setDeathLines([...deathLines, line]);
         }
-      } else if (lines[i][j] != null) {
-        let line = lines[i][j]!;
-        line.dead = true;
-        setDeathLines([...deathLines, line]);
       }
     }
-  }
-  setLines(arr);
+    setLines(arr);
 
-  for (let index = 0; index < deathLines.length; index++) {
-    if (deathLines[index].deadCount > 0) {
-      setDeathLines(deathLines.filter((item) => item !== deathLines[index]));
-    } else {
-      deathLines[index].draw();
+    for (let index = 0; index < deathLines.length; index++) {
+      if (deathLines[index].deadCount > 0) {
+        setDeathLines(deathLines.filter((item) => item !== deathLines[index]));
+      } else {
+        deathLines[index].draw();
+      }
     }
-  }
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < dots.length; j++) {
-      const elem = arr[i][j];
-      if (elem) {
-        elem.draw();
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < dots.length; j++) {
+        const elem = arr[i][j];
+        if (elem) {
+          elem.draw();
+        }
       }
     }
   }

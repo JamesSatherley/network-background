@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import Canvas from "../components/Canvas";
-import Dots from "../components/Dots";
 import { findIntersections, generateArr } from "../utils";
-import Line from "classes/Line";
 import { BackgroundProps } from "./BackgroundProps";
+import Line from "classes/Line";
 import Dot from "classes/Dot";
-
-let canvas: any;
 
 export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amountOfDots= 100, lineDistance = 120, height, width}) => {
   const [dots, setDots] = useState<Dot[]>([]);
@@ -19,6 +15,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
   const [ticker, setTicker] = useState(true);
   const [init, setInit] = useState(false);
   const [loading, setLoading] = useState(true);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const networkBackgroundElement = document.querySelector("#networkBackground");
@@ -30,10 +27,12 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
     if (!init) {
       console.log(networkBackgroundElement, height, width, window)
-      canvas = document.querySelector("#canvas");
-      canvas.width = width;
-      canvas.height = height;
-      setInit(true);
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = width;
+        canvas.height = height;
+        setInit(true);
+      }
     }
 
     async function call(tick: boolean) {
@@ -47,24 +46,29 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
           setDeathLines,
           amountOfDots,
           lineDistance,
-          canvas
+          canvasRef.current 
         );
         setTicker(!tick);
       });
     }
     call(ticker);
     setLoading(false)
-  }, []);
+  }, [dots, lines, deathLines, height, width, speedModifer, amountOfDots, lineDistance, init, ticker]);
 
   return (
-    loading ? (
-      <div>Loading...</div>
-      ) : (
-    <div id="networkBackground" className="scrollbar-none overflow-hidden h-screen w-screen z-10">
-      hi
-      <Canvas width={width ?? window.innerWidth} height={height?? window.innerHeight} />
-      <Dots dots={dots} />
-    </div>
-    )
+    <>
+      {loading && <div>Loading...</div>}
+      <div id="networkBackground" className="scrollbar-none overflow-hidden h-screen w-screen z-10">
+        hi
+        <canvas id="canvas">canvas</canvas>;
+        {dots.map((dot, index) => (
+          <div
+            key={index}
+            className={`circle ${dot.class}`}
+            style={{ left: dot.x, top: dot.y }}
+          />
+        ))}
+      </div>
+    </>
   );
 }
