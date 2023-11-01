@@ -53,7 +53,7 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
       });
     }
     call(ticker);
-    setLoading(true)
+    setLoading(false)
   });
 
   return (
