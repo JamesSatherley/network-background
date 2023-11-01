@@ -36,7 +36,7 @@ class Line {
 
     const ctx = this.canvas.getContext("2d");
     if(ctx){
-      const offsetBugPatch = -1
+      const offsetBugPatch = -2
       ctx.strokeStyle = this.getColour();
       ctx.lineWidth = 1;
   
