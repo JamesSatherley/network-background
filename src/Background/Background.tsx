@@ -24,7 +24,6 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
     setDots(generateArr(speedModifer, amountOfDots, height, width))
 
-
     if (!init) {
       console.log(networkBackgroundElement, height, width, window)
       console.dir(networkBackgroundElement)
@@ -35,26 +34,27 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
         setInit(true);
       }
     }
-
-    async function call(tick: boolean) {
-      requestAnimationFrame(() => {
-        dots.forEach((dot) => dot.update());
-        findIntersections(
-          dots,
-          lines,
-          setLines,
-          deathLines,
-          setDeathLines,
-          amountOfDots,
-          lineDistance,
-          canvasRef.current 
-        );
-        setTicker(!tick);
-      });
-    }
-    call(ticker);
     setLoading(false)
   }, []);
+
+  async function call(tick: boolean) {
+    requestAnimationFrame(() => {
+      console.log("awwwww")
+      dots.forEach((dot) => dot.update());
+      findIntersections(
+        dots,
+        lines,
+        setLines,
+        deathLines,
+        setDeathLines,
+        amountOfDots,
+        lineDistance,
+        canvasRef.current 
+      );
+      setTicker(!tick);
+    });
+  }
+  call(ticker);
 
   return (
     <>
