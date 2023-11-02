@@ -25,8 +25,6 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
     setDots(generateArr(speedModifer, amountOfDots, height, width))
 
     if (!init) {
-      console.log(networkBackgroundElement, height, width, window)
-      console.dir(networkBackgroundElement)
       const canvas = canvasRef.current;
       if (canvas) {
         canvas.width = width;
@@ -39,7 +37,6 @@ export const Background: React.FC<BackgroundProps>  = ({speedModifer = 200, amou
 
   async function call(tick: boolean) {
     requestAnimationFrame(() => {
-      console.log("awwwww")
       dots.forEach((dot) => dot.update());
       findIntersections(
         dots,
